@@ -1,0 +1,64 @@
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true"><!--Позволяет использовать в acces функции-->
+        <remember-me data-source-ref="dataSource"/>
+        <!--Все пользователи которые вошли, могут обращаться по этим ссылкам
+        interceptors устанавливаются на url адрес, а не на файл, т.е.
+        если необходимо ограничить доступ к папке content, надо
+        ограичивать все urlы, кот. ведут в эту папку
+        порядок следования interceptors важен, кто выше, тот главнее
+        -->
+        <access-denied-handler error-page="/AccesDinied"/>
+
+        <intercept-url pattern="/user" access="ROLE_USER"/>
+        <intercept-url pattern="/admin" access="ROLE_ADMIN"/>
+
+
+        <!--Данный тег позволяет включить собственную форму
+        login-page="/login" - указывает, где находиться ф-ма
+        default-target-url="/user" - указывает, куда перенаправляется по умолчанию пользователь
+        authentication-failure-url="login?error=true" - если данные введены не правильно пол-ль отправляется по этой ссылке
+        username-parameter="user_login" - название поля в форме
+        password-parameter="password_login" - название поля в форме
+        -->
+        <form-login login-page='/login'
+                    authentication-success-handler-ref="customHandler"
+                    authentication-failure-url="/login?error=true"
+                    username-parameter="user_login"
+                    password-parameter="password_login"/>
+
+        <!--Ссылка на кот. направляют пользователя при logout
+        Для создания поля logout на jsp, ис-ся спец. ссылка
+        <a href="/j_spring_security_logout">Logout</a>
+        -->
+        <logout logout-success-url="/login"/>
+
+    </http>
+
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="jdbcGroupImpl"><!--user-service-ref - to use groups of roles-->
+
+           <!-- INMEMORY AUTHENTIFICATION
+           <user-service>
+                <user name="user" password="upass" authorities="ROLE_USER"/>
+                <user name="admin" p\assword="upass" authorities="ROLE_ADMIN"/>
+            </user-service>-->
+
+            <!--
+            Without authorities groups
+            <jdbc-user-service data-source-ref="dataSource"/>-->
+        </authentication-provider>
+    </authentication-manager>
+
+    <b:bean id="jdbcGroupImpl" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+        <b:property name="dataSource" ref="dataSource"/>
+        <b:property name="enableAuthorities" value="false"/>
+        <b:property name="enableGroups" value="true"/>
+    </b:bean>
+
+</b:beans>
