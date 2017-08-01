@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: MManiagin
@@ -12,6 +13,24 @@
 </head>
 <body>
 <h1>User page</h1>
+
+<table>
+
+    <c:forEach items="${contactList}" var="item">
+        <tr>
+           <td><c:out value="${item.firstName}"/></td>
+           <td><c:out value="${item.lastName}"/></td>
+           <td><c:out value="${item.middleName}"/></td>
+           <td><c:out value="${item.mobilePhoneNumber}"/></td>
+           <td><c:out value="${item.homePhoneNumber}"/></td>
+           <td><c:out value="${item.workPhoneNumber}"/></td>
+           <td><c:out value="${item.email}"/></td>
+           <td><c:out value="${item.group}"/></td>
+        </tr>
+    </c:forEach>
+
+</table>
+
 <a href="j_spring_security_logout">Logout</a>
 </body>
 </html>

@@ -42,16 +42,6 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="jdbcGroupImpl"><!--user-service-ref - to use groups of roles-->
-
-           <!-- INMEMORY AUTHENTIFICATION
-           <user-service>
-                <user name="user" password="upass" authorities="ROLE_USER"/>
-                <user name="admin" p\assword="upass" authorities="ROLE_ADMIN"/>
-            </user-service>-->
-
-            <!--
-            Without authorities groups
-            <jdbc-user-service data-source-ref="dataSource"/>-->
         </authentication-provider>
     </authentication-manager>
 

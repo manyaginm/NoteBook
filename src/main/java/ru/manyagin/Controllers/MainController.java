@@ -18,6 +18,7 @@ import java.security.Principal;
  */
 @Controller
 public class MainController {
+
         @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
         public ModelAndView index(@RequestParam(value = "error", required = false) String error, ModelAndView modelAndView) {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -40,7 +41,7 @@ public class MainController {
 
 
 
-        /*FIXME*/
+    /*FIXME*/
         @RequestMapping(value = "/AccesDinied", method = RequestMethod.GET)
         public ModelAndView accesDiniedPage(ModelAndView modelAndView, Principal user) {
             if (user != null) {
@@ -53,15 +54,5 @@ public class MainController {
         }
 
 
-        /*FIXME*/
-        static void printUserDetails() {
-            UserDetails userDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            System.out.println("password = " + userDetail.getPassword());
-            System.out.println("login = " + userDetail.getUsername());
-
-            for (GrantedAuthority auth : userDetail.getAuthorities()) {
-                System.out.println(auth.getAuthority());
-            }
-        }
 
 }

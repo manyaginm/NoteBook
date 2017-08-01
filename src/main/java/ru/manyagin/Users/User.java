@@ -68,4 +68,25 @@ public class User implements UserInterface{
         this.password = password;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this){return true;}
+        if(obj==null||obj.getClass()!=this.getClass()){
+            return false;
+        }
+       User user = (User)obj;
+        return this.getUsername().equals(user.getUsername());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hashcode=0;
+        char[] arr = this.getUsername().toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            hashcode = 31 * hashcode+ arr[i];
+        }
+        return hashcode;
+    }
 }

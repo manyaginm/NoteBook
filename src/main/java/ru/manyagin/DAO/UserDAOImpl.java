@@ -27,10 +27,9 @@ public class UserDAOImpl implements UserDAO{
     public void addUser(UserInterface userInterface){
         Session session = sessionFactory.openSession();
         User user = new User(userInterface.getUsername(), userInterface.getPassword());
-
         Groups groups = new Groups();
-
         user.setGroups(groups);
+
         try {
             session.beginTransaction();
             session.save(user);
