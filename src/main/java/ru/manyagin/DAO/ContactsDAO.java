@@ -9,4 +9,7 @@ import java.util.Set;
  */
 public interface ContactsDAO {
     Set<Contact> getAllContact(String contactOwner);
+
+    void updateContact(Contact contact);
+
 }
