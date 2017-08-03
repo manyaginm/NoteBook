@@ -41,8 +41,8 @@
            <td><c:out value="${item.group}"/></td>
         </tr>
     </c:forEach>
-    <td><button id="editBtn">Edit</button></td>
-    <td><button id = "createBtn">Create new contact</button></td>
+    <td><button id="editBtn"> Edit</button></td>
+    <td><button id ="createBtn"> Create new contact</button></td>
 </table>
 
 <div id="myModal" class="modal">
