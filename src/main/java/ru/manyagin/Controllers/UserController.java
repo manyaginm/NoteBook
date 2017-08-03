@@ -15,6 +15,8 @@ import ru.manyagin.Contacts.ContactImpl;
 import ru.manyagin.DAO.ContactsDAO;
 
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -38,7 +40,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/updateContact", method=RequestMethod.GET)
-    public ModelAndView updateContact(
+    public void updateContact(
             @RequestParam(value = "editId")int newId,
             @RequestParam(value = "editFirstName") String newFirstName,
             @RequestParam(value = "editLastName") String newLastName,
@@ -48,7 +50,9 @@ public class UserController {
             @RequestParam(value = "editHomePhoneNumber") String newHomePhoneNumber,
             @RequestParam(value = "editEmail") String newEmail,
             @RequestParam(value = "editGroup") String newGroup,
-            ModelAndView modelAndView){
+            ModelAndView modelAndView,
+            HttpServletResponse response) throws IOException {
+
             UserDetails userDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Contact contact = new ContactBuilderImpl()
                     .setId(newId)
@@ -62,15 +66,37 @@ public class UserController {
                     .setGroup(newGroup)
                     .setContactOwner(userDetail.getUsername().toString())
                     .build();
-
         contactsDAO.updateContact(contact);
+        response.sendRedirect("/user");
+    }
 
 
-        System.out.println(contact.getId()+" "+contact.getFirstName() + " " + contact.getLastName()+" "+ contact.getMobilePhoneNumber());
+    @RequestMapping(value = "/saveContact", method=RequestMethod.GET)
+    public void saveContact(
+            @RequestParam(value = "editFirstName") String newFirstName,
+            @RequestParam(value = "editLastName") String newLastName,
+            @RequestParam(value = "editMiddleName") String newMiddleName,
+            @RequestParam(value = "editMobilePhoneNumber") String newMobilePhoneNumber,
+            @RequestParam(value = "editWorkPhoneNumber") String newWorkPhoneNumber,
+            @RequestParam(value = "editHomePhoneNumber") String newHomePhoneNumber,
+            @RequestParam(value = "editEmail") String newEmail,
+            @RequestParam(value = "editGroup") String newGroup,
+            ModelAndView modelAndView,
+            HttpServletResponse response) throws IOException {
+        UserDetails userDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Set<Contact> contactList = contactsDAO.getAllContact(userDetail.getUsername().toString());
-        modelAndView.addObject("contactList", contactList);
-        modelAndView.setViewName("Content/user");
-        return modelAndView;
+        Contact contact = new ContactBuilderImpl()
+                .setfirstName(newFirstName)
+                .setMiddleName(newMiddleName)
+                .setLastName(newLastName)
+                .setMobilePhoneNumber(newMobilePhoneNumber)
+                .setWorkPhoneNumber(newWorkPhoneNumber)
+                .setHomePhoneNumber(newHomePhoneNumber)
+                .setEmail(newEmail)
+                .setGroup(newGroup)
+                .setContactOwner(userDetail.getUsername().toString())
+                .build();
+        contactsDAO.updateContact(contact);
+        response.sendRedirect("/user");
     }
 }

@@ -30,7 +30,12 @@ $("#editBtn").click(function () {
     document.getElementById("editGroup").value=obj.group;
     modal.style.display='block';}
 });
-$("#")
+$("#createBtn").click(function () {
+
+    document.getElementById("submitChange").textContent = "Save";
+    document.getElementById("submitChange").formAction = "saveContact";
+    modal.style.display='block';
+});
 
 cancelButton.onclick = function () {
     modal.style.display='none';

@@ -47,7 +47,7 @@ public class ContactsDAOImpl implements ContactsDAO{
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
-            session.update(contact);
+            session.saveOrUpdate(contact);
             session.getTransaction().commit();
         }finally {
             session.close();

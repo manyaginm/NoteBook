@@ -49,7 +49,6 @@
     <div class="modal-content">
         <span class="close">x</span><!--Кнопка закрытия окна-->
         <form>
-           <%-- <span id="editId"></span>--%>
         <table>
             <tr hidden>
                 <td><input type="text" name="editId" id="editId" hiden> First name</td>
@@ -80,7 +79,7 @@
             </tr>
         </table>
 
-        <button  type="submit" formaction="updateContact" formmethod="get">Submit</button>
+        <button  type="submit" formaction="updateContact" formmethod="get" id="submitChange">Submit</button>
         <button value="" id="editCancel">Cancel</button>
         </form>
     </div>
