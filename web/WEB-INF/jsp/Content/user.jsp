@@ -14,8 +14,9 @@
 </head>
 <body>
 <h1>User page</h1>
-
+<input type="text" id = "search"/><br><br>
 <table>
+    <thead>
     <tr>
         <td></td>
         <td>First Name</td>
@@ -27,22 +28,28 @@
         <td>Email</td>
         <td>Group</td>
     </tr>
+    </thead>
+    <tbody id="contactTBody">
     <c:forEach items="${contactList}" var="item">
         <span id="id" hidden><c:out value="${item.id}"/></span>
-        <tr>
-           <td><input id="editRadio" type="radio" name="contactGroup"  value="<c:out value="${item.asJson}"/>"/> </td>
-           <td><c:out value="${item.firstName}"/></td>
-           <td><c:out value="${item.lastName}" /></td>
-           <td><c:out value="${item.middleName}"/></td>
+        <tr class="contactInfo">
+           <td><input id="editRadio" type="radio" name="contactGroup"  value="<c:out value="${item.asJson}"/>"/></td>
+           <td class="contactFirstName"><c:out value="${item.firstName}"/></td>
+           <td class = "contactLastName"><c:out value="${item.lastName}" /></td>
+           <td class = "contactMiddleName"><c:out value="${item.middleName}"/></td>
            <td><c:out value="${item.mobilePhoneNumber}"/></td>
            <td><c:out value="${item.homePhoneNumber}"/></td>
            <td><c:out value="${item.workPhoneNumber}"/></td>
            <td><c:out value="${item.email}"/></td>
            <td><c:out value="${item.group}"/></td>
         </tr>
+
     </c:forEach>
-    <td><button id="editBtn"> Edit</button></td>
-    <td><button id ="createBtn"> Create new contact</button></td>
+        </tbody>
+    <tfoot>
+        <td><button id="editBtn"> Edit</button></td>
+        <td><button id ="createBtn"> Create new contact</button></td>
+    </tfoot>
 </table>
 
 <div id="myModal" class="modal">

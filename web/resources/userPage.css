@@ -10,19 +10,31 @@
     background-color: rgba(0,0,0,0.8);
 
 }
+
 .modal-content{
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 18%;
 }
+
 .close{
     color: #aaa;
     float: right;
     font-size: 20px;
     font-weight: bold;
 }
+
 #h1{
   color: red;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+#contactTBody tr:hover{
+    background-color: #aaaaaa;
+    color: black;
 }

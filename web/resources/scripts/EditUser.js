@@ -5,6 +5,7 @@ var modal = document.getElementById("myModal");
 var radios = document.getElementsByName('contactGroup');
 var span= document.getElementsByClassName("close")[0];
 var cancelButton = document.getElementById("editCancel");
+var searchField = document.getElementById("search");
 
 
 $("#editBtn").click(function () {
@@ -31,16 +32,29 @@ $("#editBtn").click(function () {
     modal.style.display='block';}
 });
 $("#createBtn").click(function () {
-
     document.getElementById("submitChange").textContent = "Save";
     document.getElementById("submitChange").formAction = "saveContact";
     modal.style.display='block';
 });
-
 cancelButton.onclick = function () {
     modal.style.display='none';
 }
 span.onclick = function () {
     modal.style.display='none';
 }
-
+searchField.onkeyup=function () {
+    var filter = searchField.value.toUpperCase();
+    var contactsInfo = document.getElementsByClassName("contactInfo")
+    var cntcFN= document.getElementsByClassName("contactFirstName");
+    var cntcMN = document.getElementsByClassName("contactMiddleName");
+    var cntcLN = document.getElementsByClassName("contactLastName");
+    for(var i =0; i<contactsInfo.length; i++){
+        var strToCheck = cntcFN[i].textContent+" "+cntcMN[i].textContent+" "+cntcLN[i].textContent;
+        var parent = cntcFN[i].parentNode;
+        if(strToCheck.toUpperCase().indexOf(filter)>-1) {
+            parent.style.display = "";
+        }else{
+            parent.style.display = "none";
+        }
+    }
+}
